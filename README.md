@@ -1,21 +1,20 @@
-## Automação de testes web com Cypress
-Projeto do curso Cypress Discovery, da QA Ninja.
+## Javascript com Node Server
+Projeto do módulo Javascript do curso Cypress Discovery, da QA Ninja (2022).
 
 -----------------------------------------
 ### O que este script faz?
-Este script efetua alguns testes na aplicação [Buger Eats](https://buger-eats.vercel.app/).
+Este script cria uma página principal em HTML, que acessa dois arquivos Javascript, e depois executa o projeto via Node server, utilizando o Thunder Client do VS Code.
+
+Também ensina a integrar o Git Bash com o Hyper.
 
 -----------------------------------------
 ### Instalação e uso da arquitetura
 
-**Atenção:** O Cypress somente funciona em computadores 64-bits (MacOS, Linux ou Windows).
-
 - Instale as ferramentas:
   - [NodeJS](https://nodejs.org/en/download/ "NodeJS")
   - [NPM](https://www.npm.com/ "NPM")
-  - [Cypress](https://www.npmjs.com/package/cypress/ "Cypress")
   - [Git for Windows](https://gitforwindows.org/) e [Hyper](https://hyper.is/): Após a instalação de ambos, vamos integrar o Hyper com o Git Bash:
-    - execute o Hyper, acesse o *menu superior esquerdo > Edit > Preferences*, altere as linhas `fontSize: 12,`, `shell: '',`, `shellArgs: ['--login'],` e `env: {},`,        respectivamente, para:
+    - execute o Hyper, acesse o *menu superior esquerdo > Edit > Preferences*, altere as linhas `fontSize: 12,`, `shell: '',`, `shellArgs: ['--login'],` e `env: {},`, respectivamente, para:
 
       ```
       fontSize: 26,
@@ -23,6 +22,7 @@ Este script efetua alguns testes na aplicação [Buger Eats](https://buger-eats.
       shellArgs: ['--command=usr/bin/bash.exe', '-l', '-i'],
       env: { 'TERM':'cygwin' },
       ```
+
     - Após configurar, salve, feche e abra o Hyper novamente. As configurações do Hyper serão visualizadas, apresentando o Git Bash integrado. Para acessar o C:/, diferentemente     do cmder, informamos `cd /c/`.
     - Instale o plugin `hyper i hyperpower`, feche e abra o Hyper para concluir a instalação do plugin. Ele instala um efeito que exibe um efeito ao digitar os comandos.
 
@@ -41,97 +41,7 @@ npm install --save -dev
 npm -v && node -v
 ```
 
-- Para abrir o painel do Cypress e escolher quais testes deseja executar, digite no terminal:
-```
-npm run cypress:open
-```
-
-- Para executar todos os testes em modo headless, digite no terminal:
-```
-npx cypress run
-```
-
------------------------------------------
-### Arquitetura do projeto
-
-```
-📂 cypress-test-api/
-  ├─ 📂 cypress/
-  │        │
-  │        ├── 📂 fixtures/ (pasta que contém arquivos com a massa de dados utilizada nos testes)
-  │        │   └── 📂 integration/services/ (contém as subpastas dos ednpoints, na estrutura detalhada a seguir)
-  │        │       ├── 📂 endpoint_a_ser_testado/
-  │        │           ├── 📂 contracts/ (pasta que contém os testes so schemas)
-  │        │               └── 📜 responseNomeEndopint.contract.js
-  │        │           ├── 📂 payloads/ (pasta que contém arquivos com a massa de dados utilizada nos testes)
-  │        │               └── 📜 teste.payload.json
-  │        │           ├── 📂 tests/ (pasta que contém os testes aplicados nas requests)
-  │        │               └── 📜 getNomeEndpoint.specs.js
-  │        │               └── 📜 postNomeEndopint.specs.js
-  │        │
-  │        │
-  │        ├── 📂 plugins/
-  │        │   └── 📜 index.js
-  │        │
-  │        │
-  │        ├── 📂 support/
-  │        │   └── 📂 requests/ (pasta que contém os commands aplicados aos endpoints)
-  │        │       └── 📜 index.js
-  │        │   ├── 📜 commands.js
-  │        │   └── 📜 index.js
-  │        │
-  ├── 📂 node_modules/
-  ├── 📜 .gitignore
-  ├── 📜 cypress.json
-  ├── 📜 package-lock.json
-  ├── 📜 package.json
-  └── 📜 README.md
-```
-
------------------------------------------
-### Camadas da arquitetura
-
-- **payloads:** arquivos para massa de dados estática para os testes
-- **integration/services:** contém as pastas com os testes de cada endpoint
-- **plugins:** plugins que são utilizados na solução ficam dentro do arquivo "plugins/index.js"
-- **support:** camada com comandos Cypress customizados e sobrescritas globais:
-  - **requests**: pasta que contém os comandos aplicados às requests de cada endpoint
-  - Arquivo <i>commands.js</i> para comandos específicos
-  - Arquivo <i>index.js</i> responsável por receber as importações dos comandos Cypress
-- **node_modules:** arquivos ou diretórios que podem ser carregados pelo NodeJS
-- **cypress.json:** arquivo de configuração dos Cypress, que contém a <i> baseUrl </i> dos endpoints
-- **package-lock.json:** gerado automaticamente com as instalações e atualizações de pacotes
-
 ---
-
-## Iniciando um novo projeto
-
-- Crie uma pasta, acesse a pasta via linha de comando, digite `npm init -y`
-- Abra o projeto no VS Code, com o comando `code .`
-- Instale o Cypress, com o comando `npm install cypress --save-dev`
-- Altere a linha `test` no arquivo *package.json*, para que fique da seguinte forma:
-```javascript
-  "scripts": {
-    "test": "npx cypress open"
-  },
-```
-- Digite o comando `npm run test` para inicializar o painel do Cypress pela primeira vez, e criar a estrutura do Cypress no nosso projeto.
-
-Acesse *cypress > integration*, apague as pastas *1-getting-started* e *2-advanced-examples*. São pastas exemplo, não utilizaremos nos projetos.
-
-## Primeiro script
-Crie o arquivo *home.spec.js*, contendo o comando `cy:viewport` para configurar a resolução da janela exibida dentro do painel do Cypress, e `cy:visit` para acesar a URL:
-```javascript
-describe ('Home page', () => {
-	it('app deve estar online', () => {
-		cy.viewport(1920, 1080)
-		cy.visit('https://buger-eats.vercel.app/')
-	})
-})
-```
-
-## Não use o Selector Playground
-
 
 ## Javascript - acessando arquivos externos
 Crie a pasta  *js*, contendo os arquivos abaixo:
@@ -216,11 +126,11 @@ Para fazer com que os arquivos sejam exibidos dentro do *index.html*, basta decl
 ```
 
 ## Startando um servidor local
-Para abrirmos a página do exemplo, precisamos navegar até a pasta onde consta o arquivo *index.html* e dar duplo clique. No entanto, seria interesdsante abrirmos a página em um servidor web.
+Para abrirmos a página do exemplo, precisamos navegar até a pasta onde consta o arquivo *index.html* e dar duplo clique. No entanto, seria interessante abrirmos a página em um servidor web.
 
-Para isso, execute o prompt de comando como **administrador**, e digite o comando `npm isntall http-server -g` (o `-g` instala o pacote node de forma global, ou seja, em qualquer lugar dentro do meu sistema operacional, como se fosse um executável).
+Para isso, execute o prompt de comando como **administrador**, e digite o comando `npm install http-server -g` (o `-g` instala o pacote node de forma global, ou seja, em qualquer lugar dentro do meu sistema operacional, como se fosse um executável).
 
-Feche o prompt de compando, abra o Hyper, acesse a pasta *javascript* do projeto, e digite o comando `http-server`. Isso transformará a pasta *javascript* em um servidor web local.
+Feche o prompt de compando, abra o Hyper, acesse a pasta *javascript-node-server* do projeto, e digite o comando `http-server`. Isso transformará a pasta *javascript-node-server* em um servidor web local.
 
 O arquivo *index.html* representa a página principal a ser aberta em servidores, então ao acessarmos o navegador e digitar `localhost:8080`, nossa página será aberta.
 
@@ -231,7 +141,7 @@ Ao acessar o modo desenvolvedor da página (F12), aba *Sources*, temos a estrutu
 Com a implementação do [Javascript Engine V8](https://medium.com/reactbrasil/como-o-javascript-funciona-dentro-da-engine-v8-5-dicas-sobre-como-escrever-c%C3%B3digo-otimizado-e05af6088fd5), foi possível executar o Javascript também **no servidor**, além do navegador. Veremos um exemplo no tópico a seguir.
 
 ## Rodando Javascript no backend utilizando NodeJS
-Acessando a pasta *javascript* no console, informe o comando `npm init`, e informar os valores:
+Acessando a pasta *javascript-node-server* no console, informe o comando `npm init`, e informar os valores:
 - package name: `node-server`
 - version: (manter)
 - description: `Rodando o Javascript no servidor web`
@@ -239,11 +149,11 @@ Acessando a pasta *javascript* no console, informe o comando `npm init`, e infor
 - test command: (manter)
 - git repository: (manter)
 - keywords: (manter)
-- author: Carol Ciola
+- author: `Carol Ciola`
 - license: `MIT`
 - Is this ok? `yes`
 
-Abrindo o projeto no VS Code, foi criado o arquivo `package.json`contendo as configurações informadas. esta pasta, portanto, será um projeto Node.
+Abrindo o projeto no VS Code, foi criado o arquivo `package.json`contendo as configurações informadas. Esta pasta, portanto, será um projeto Node.
 
 No Hyper, ainda na pasta do projeto, execute o comando `npm install express`. O **express** é um framework Node que cria um servidor para rodar no backend.
 
@@ -306,7 +216,7 @@ app.get('/show', function (req, res) {
 
 Disparando uma nova requisição no endpoint, passando uma *query parameter* para a idade `http://localhost:3000/show?idade=38` apenas para ver se está funcionando. Será retornado para `test` o valor `38`.
 
-Vamos incrementar o script da requisição com a regra de idade do arquivo *show.js*. 
+Vamos incrementar o script da requisição com a regra de idade do arquivo *show.js*.
 
 Porém não precisamos mais informar o `value` para `idade`, pois agora estamos obterndo o valor de uma constante, não mais de uma variável.
 
@@ -339,14 +249,3 @@ Caso o *query parameter* não seja informado, ou seja informado sem passar nenhu
 	return res.json({message: 'Idade é um campo obrigatório.'})
 }
 ```
-
-## Masterclass complementar
-Links das masterclasses complementares do curso:
-
-- [Masterclass #1](https://www.youtube.com/watch?v=UfGROGLyqZ0&list=LL&index=1) (20/01/2021)
-
-
-## Dicas
-- *npm* significa Node Package Manager, ou gerenciador de pacotes do NodeJS.
-
-- Comunidade no Telegram: https://t.me/joinchat/J2lmnhiUztr7_Hjes40Wgw

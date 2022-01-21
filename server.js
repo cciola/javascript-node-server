@@ -5,6 +5,11 @@ app.get('/', function (req, res) { //método GET, que devolve como resutado da r
   res.json({message: 'Hello World'})
 })
 
+app.get('/bands', function (req, res) {
+	var bands = ['Red Hot Chili Peppers', 'Pink Floyd', 'Led Zeppelin', 'Turnover', 'Cranberries']
+	return res.json({data: bands})
+})
+
 app.get('/show', function (req, res) {
   const idade = req.query.idade
 
