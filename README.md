@@ -130,12 +130,12 @@ Para abrirmos a página do exemplo, precisamos navegar até a pasta onde consta 
 
 Para isso, execute o prompt de comando como **administrador**, e digite o comando `npm install http-server -g` (o `-g` instala o pacote node de forma global, ou seja, em qualquer lugar dentro do meu sistema operacional, como se fosse um executável).
 
-Feche o prompt de compando, abra o Hyper, acesse a pasta *javascript-node-server* do projeto, e digite o comando `http-server`. Isso transformará a pasta *javascript-node-server* em um servidor web local.
+Feche o prompt de comando, abra o Hyper, acesse a pasta *javascript-node-server* do projeto, e digite o comando `http-server`. Isso transformará a pasta *javascript-node-server* em um servidor web local.
 
 O arquivo *index.html* representa a página principal a ser aberta em servidores, então ao acessarmos o navegador e digitar `localhost:8080`, nossa página será aberta.
 
 ### Antes do NodeJS
-Ao acessar o modo desenvolvedor da página (F12), aba *Sources*, temos a estrutura de arquivos do nosso projeto. Uma vez que nosso código HTML tenha instrução para trabalhar com Javascript, o navegador faz o **download** dos programas em Javascript do nosso projeto, que estão no servidor web. Ou seja, o javascript é **executado no navegador web**.
+Ao acessar o modo desenvolvedor da página (F12), aba *Sources*, temos a estrutura de arquivos do nosso projeto. Uma vez que nosso código HTML tenha instrução para trabalhar com Javascript, o navegador faz o **download** dos programas em Javascript do nosso projeto, que estão no servidor web. Ou seja, o Javascript é **executado no navegador web**.
 
 ### Após o NodeJS
 Com a implementação do [Javascript Engine V8](https://medium.com/reactbrasil/como-o-javascript-funciona-dentro-da-engine-v8-5-dicas-sobre-como-escrever-c%C3%B3digo-otimizado-e05af6088fd5), foi possível executar o Javascript também **no servidor**, além do navegador. Veremos um exemplo no tópico a seguir.
@@ -183,7 +183,7 @@ Sempre que editarmos nosso script, é necessário encerrar o processo do server 
 Depois disso, vamos passar a iniciar o server com o comando `npx nodemon server.js`. O **nodemon** fica monitorando o projeto/arquivo que está em execução, e quando ocorre uma alteração, ele recarrega a aplicação automaticamente.
 
 ### Headers
-No Thunder Client, acessando a aba *Headers*, vemos que está nos devolvendo o valor da requisição em *text/html* (vide *content-type*), mas queremos que retorne no formato *json*. Para isso, vamos editar o objeto `res`, referente à resposta, acrescentando `.json` e alterando o formato da mensagem confore abaixo:
+No Thunder Client, acessando a aba *Headers*, vemos que está nos devolvendo o valor da requisição em *text/html* (vide *content-type*), mas queremos que retorne no formato *json*. Para isso, vamos editar o objeto `res`, referente à resposta, acrescentando `.json` e alterando o formato da mensagem conforme abaixo:
 ```javascript
 res.json({message: 'Hello World'})
 ```
@@ -218,9 +218,9 @@ Disparando uma nova requisição no endpoint, passando uma *query parameter* par
 
 Vamos incrementar o script da requisição com a regra de idade do arquivo *show.js*.
 
-Porém não precisamos mais informar o `value` para `idade`, pois agora estamos obterndo o valor de uma constante, não mais de uma variável.
+Porém não precisamos mais informar o `value` para `idade`, pois agora estamos obtendo o valor de uma constante, não mais de uma variável.
 
-O `alert`também é algo exclusivo para exibir uma mensagem no navegador, não se aplica à API. Devolveremos então no formato *json*, `return res.json({message: '...'})`.
+O `alert` também é algo exclusivo para exibir uma mensagem no navegador, não se aplica à API. Devolveremos então no formato *json*, `return res.json({message: '...'})`.
 
 ```javascript
 app.get('/show', function (req, res) {
@@ -243,7 +243,7 @@ app.get('/show', function (req, res) {
 
 Disparando a requisição novamente, nos será retornada a mensagem de acordo com a regra para a idade informada na *query parameter* `http://localhost:3000/show?idade=38`.
 
-Caso o *query parameter* não seja informado, ou seja informado sem passar nenhum valor da idade, vamos ajustar para que seja interpretado corretamente pela API, ficando `!idade` (o ! questiona se é nulo):
+Caso o *query parameter* não seja informado, ou seja informado sem passar nenhum valor da idade, vamos ajustar para que seja interpretado corretamente pela API, ficando `!idade` (o `!` questiona se é nulo):
 ```javascript
 } else if (!idade) {
 	return res.json({message: 'Idade é um campo obrigatório.'})
